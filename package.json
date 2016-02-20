@@ -1,0 +1,11 @@
+{
+  "name": "gun-loc",
+  "version": "1.0.0",
+  "description": "gun loc api endpoint",
+  "author": "bern",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4"
+  }
+}
