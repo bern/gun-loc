@@ -31,7 +31,7 @@ a.home-link {
 }
 
 a.home-link:hover {
-    color: #2c3e50;
+    color: #B25B09;
     text-decoration: none;
 }
 
@@ -164,6 +164,45 @@ hr.cogs-primary:after {
     background-color: #fff;
 }
 
+hr.person-light,
+hr.person-primary {
+    margin: 25px auto 30px;
+    padding: 0;
+    max-width: 250px;
+    border: 0;
+    border-top: solid 5px;
+    text-align: center;
+}
+
+hr.person-light:after,
+hr.person-primary:after {
+    content: "\f007";
+    display: inline-block;
+    position: relative;
+    top: -.8em;
+    padding: 0 .25em;
+    font-family: FontAwesome;
+    font-size: 2em;
+}
+
+hr.person-light {
+    border-color: #fff;
+}
+
+hr.person-light:after {
+    color: #fff;
+    background-color: #B25B09;
+}
+
+hr.person-primary {
+    border-color: #2c3e50;
+}
+
+hr.person-primary:after {
+    color: #2c3e50;
+    background-color: #fff;
+}
+
 .img-centered {
     margin: 0 auto;
 }
@@ -234,6 +273,10 @@ header .intro-text .skills {
     .navbar-fixed-top.navbar-shrink .navbar-brand {
         font-size: 1.5em;
     }
+    
+    .navbar-brand:hover {
+        background-color: #B25B09;
+    }
 }
 
 .navbar {
@@ -242,12 +285,20 @@ header .intro-text .skills {
     font-weight: 700;
 }
 
+.navbar-default .navbar-brand:hover {
+    color: #FFB065;
+}
+
 .navbar a:focus {
     outline: 0;
 }
 
 .navbar .navbar-nav {
     letter-spacing: 1px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #FFB065;
 }
 
 .navbar .navbar-nav li a:focus {
@@ -374,9 +425,9 @@ section.features {
 
 .floating-label-form-group {
     position: relative;
-    margin-bottom: 0;
     padding-bottom: .5em;
     border-bottom: 1px solid #eee;
+    border: 1px solid;
 }
 
 .floating-label-form-group input,
@@ -425,7 +476,7 @@ section.features {
 }
 
 form .row:first-child .floating-label-form-group {
-    border-top: 1px solid #eee;
+    
 }
 
 footer {
@@ -554,4 +605,17 @@ footer .footer-below {
 
 .inspire-quote {
     margin-top: 30px;
+}
+
+.btn-gunloc {
+    background-color: #FFB065;
+    outline-color: #233140;
+    color: white;
+}
+
+
+.btn-gunloc:hover {
+    background-color: #B25B09;
+    border-color: #B25B09;
+    outline-color: #B25B09;
 }
