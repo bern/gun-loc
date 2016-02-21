@@ -124,7 +124,7 @@
 
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                <li role="presentation" onclick="makeMagic()"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
                 <li role="presentation"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">Edit</a></li>
             </ul>
 
@@ -257,20 +257,20 @@
 <script type="text/javascript" src="javascripts/module.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
-
+function makeMagic() {
+  var realValues = [];
+  $.get('/fakehit', function(res) {
+    for(i = 0; i < res.length; i++) {
+      // console.log(res[i]["hit_at"]);
+      realValues.push(new Date(res[i]["hit_at"]));
+    }
+    console.log(realValues);
+    restOfCode(realValues);
+  });
+}
 // Generate a Bates distribution of 10 random variables.
 var values = d3.range(1000).map(d3.random.bates(10));
 // console.log(values);
-
-var realValues = [];
-$.get('/fakehit', function(res) {
-  for(i = 0; i < res.length; i++) {
-    // console.log(res[i]["hit_at"]);
-    realValues.push(new Date(res[i]["hit_at"]));
-  }
-  console.log(realValues);
-  restOfCode(realValues);
-});
 
 function restOfCode(realValues) {
   // A formatter for counts.
@@ -308,11 +308,16 @@ function restOfCode(realValues) {
       .data(data)
       .enter().append("g")
       .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(" + x(d.x) + ", 0)"; });
+
+  bar.transition().duration(1000)
       .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
 
   bar.append("rect")
       .attr("x", 1)
       .attr("width", (width/12) - 1)
+  		.attr("height", 0)
+    .transition().duration(1000)
       .attr("height", function(d) { return height - y(d.y); });
 
   bar.append("text")
