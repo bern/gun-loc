@@ -20,5 +20,9 @@
         <hr class="alert-light" ng-show="gun.status == 'alert'">
         <hr class="off-light" ng-show="gun.status == 'off'">
       </div>
+      
+      <div class="gun-item gun-enable">
+        <button class="btn btn-gunloc" ng-click='buttonClick({gun: gun})'>Enable</button>
+      </div>
   </div>
 </div>

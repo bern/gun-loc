@@ -134,33 +134,33 @@
 <!--                <guns data="data" buttonClick="enableGun(data)"></guns>  -->
                 <div class="card" ng-repeat="gun in guns">
                   <div class="card-block">
-                      <div class="gun-item gun-left">
+                      <div class="gun-item gun-left gun-first col-md-8">
                          <h4 class="card-title">Type: {{gun.firearm_type}}</h4>
                          <p class="card-text">Date: {{gun.acquisition_date}}</p>
                       </div>
 
-                      <div class="gun-item gun-mid">
-                         <h4 class="card-title">Manufacturer: {{gun.manufacturer}}</h4>
+                      <div class="gun-item gun-mid col-md-8">
+                         <h4 class="card-title">Make: {{gun.manufacturer}}</h4>
                          <p class="card-text">Model: {{gun.model}}</p>
                       </div>
 
-                      <div class="gun-item gun-right">
-                         <h4 class="card-title">Caliber/Guage: {{gun.caliber_guage}}</h4>
+                      <div class="gun-item gun-right col-md-8">
+                         <h4 class="card-title">Caliber: {{gun.caliber_gauge}}</h4>
                          <p class="card-text">Serial #: {{gun.serial_num}}</p>
                       </div>
 
-                      <div class="gun-item gun-status">
+                      <div class="gun-item gun-status col-md-4">
                         <hr class="active-light" ng-show="gun.status == 'active'">
                         <hr class="alert-light" ng-show="gun.status == 'alert'">
                         <hr class="off-light" ng-show="gun.status == 'off'">
                       </div>
 
-                      <div class="gun-item gun-enable">
+                      <div class="gun-item gun-enable col-md-4">
 <!--                        <button class="btn btn-gunloc" ng-click='enableGun(gun)'>Enable</button>-->
 <!--                          TESTING DATA FETCH-->
                           <button class="btn btn-gunloc" ng-click='gunActive(gun)' ng-show="gun.status == 'off'">Enable</button>
                           <button class="btn btn-gunloc" ng-click='gunOff(gun)' ng-show="gun.status == 'active'">Disable</button>
-                          <button class="btn btn-gunloc" ng-click='gunActive(gun)' ng-show="gun.status == 'alert'">Reset</button>
+                          <button class="btn btn-gunloc" ng-click='gunReset(gun)' ng-show="gun.status == 'alert'">Reset</button>
                       </div>
                   </div>
                 </div>

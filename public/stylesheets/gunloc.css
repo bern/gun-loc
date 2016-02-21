@@ -647,6 +647,7 @@ footer .footer-below {
 .card-block {
     padding: 1.25rem;
     display: inline-block;
+    width: 100%
 }
 
 .card-title {
@@ -670,8 +671,8 @@ footer .footer-below {
 
 .gun-item {
     display: inline-block;
-    margin-right: 50px;
     text-overflow:clip;
+    width: 20%
 }
 
 hr.active-light,
@@ -790,3 +791,8 @@ hr.off-primary:after {
     color: green;
     background-color: #fff;
 }
+
+.gun-enable button {
+    width: 100px;
+}
+
