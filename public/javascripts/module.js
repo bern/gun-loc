@@ -85,6 +85,11 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
         //tell database this
     }
     
+    $scope.gunReset = function(gun) {
+        gun.status = "active";
+        $scope.reset();
+    }
+    
     $scope.getData = function() {
         console.log("Fetching data...");
         $http({
@@ -100,9 +105,24 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
         });
     }
     
+    $scope.reset  = function() {
+        console.log("Resetting alert...");
+        $http({
+          method: 'GET',
+          url: '/reset'
+        }).then(function successCallback(response) {
+            console.log("Gun reset!");
+            console.log(response);
+            $scope.getData();   
+          }, function errorCallback(response) {
+            console.log("Oops...");
+            console.log(response);
+        });
+    }
+    
     $scope.pollDB = function (message) {
         
-        var intervalPeriod = 5000;
+        var intervalPeriod = 1000;
         
         var rep = $interval(function () {
             $scope.getData();
