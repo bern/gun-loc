@@ -22,8 +22,17 @@ router.get('/dashboard', function(req, res, next) {
   res.render('dashboard', {});
 });
 
-// pass in ?gun_num=0
-router.get('/hit', function(req, res, next) {
+router.get('/hit', function(req,res,next) {
+  Hit.find(function(err, hits) {
+    if (err) {
+      res.json(err);
+    } else {
+      res.json(hits);
+    }
+  })
+})
+
+router.post('/hit', function(req, res, next) {
   Gun.findOne({gun_num: 0}, function(err, gun) {
     if (err) {
       res.send(err);

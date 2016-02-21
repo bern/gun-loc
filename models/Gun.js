@@ -7,7 +7,8 @@ var GunSchema = new mongoose.Schema({
   model: String,
   caliber_gauge: String,
   serial_num: String,
-  gun_num: Number
+  gun_num: Number,
+  status: String
 });
 
 module.exports = mongoose.model('Gun', GunSchema);
