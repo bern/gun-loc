@@ -1,26 +1,26 @@
 <!--
 <html>
-    <head>
+<head>
 -->
 
-    <!--        STYLES          -->
+<!--        STYLES          -->
 <!--
-        <link rel="stylesheet" type="text/css" href="css//bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/gunloc.css">
+<link rel="stylesheet" type="text/css" href="css//bootstrap/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/gunloc.css">
 -->
 
-    <!--        SCRIPTS         -->
+<!--        SCRIPTS         -->
 <!--
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/v2.3.7/angular-strap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/v2.3.7/angular-strap.tpl.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/v2.3.7/angular-strap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular-strap/v2.3.7/angular-strap.tpl.min.js"></script>
 
-    </head>
+</head>
 
-    <body>
-        <button class="btn btn-primary">Hello world!</button>
-    </body>
+<body>
+<button class="btn btn-primary">Hello world!</button>
+</body>
 </html>-->
 
 <!DOCTYPE html>
@@ -28,183 +28,283 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Gun Loc - The Secure Way to Monitor your Firearms</title>
+  <title>Gun Loc - The Secure Way to Monitor your Firearms</title>
 
-    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+  <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="/stylesheets/gunloc.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="/stylesheets/gunloc.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <!-- Custom Fonts -->
+  <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style>
 
+    body {
+      font: 10px sans-serif;
+    }
+
+    .bar rect {
+      fill: steelblue;
+      shape-rendering: crispEdges;
+    }
+
+    .bar text {
+      fill: #fff;
+    }
+
+    .axis path, .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+  </style>
 </head>
 
 <body id="page-top" class="index" ng-app="app" ng-controller="appController">
-    
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#page-top">Welcome, {{data.username}}</a>
-                </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="hidden">
-                            <a href="#page-top"></a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="index.ejs">Home</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
+  <!-- Navigation -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#page-top">Welcome, {{data.username}}</a>
+      </div>
 
-        <!-- Header -->
-<!--
-        <header>
-            <div class="container">
-                <h1>Welcome to Gun Loc</h1>
-                <p>An <a class="home-link" href="https://en.wikipedia.org/wiki/Internet_of_Things">"Internet of Things" </a> solution to private firearms monitoring</p>
-                <hr class="star-light">
-                <span class="skills">Gun Safety - Security - Peace of Mind</span>
-                       
-            </div>
-        </header>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="hidden">
+            <a href="#page-top"></a>
+          </li>
+          <li class="page-scroll">
+            <a href="index.ejs">Home</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+  <!-- Header -->
+  <!--
+  <header>
+  <div class="container">
+  <h1>Welcome to Gun Loc</h1>
+  <p>An <a class="home-link" href="https://en.wikipedia.org/wiki/Internet_of_Things">"Internet of Things" </a> solution to private firearms monitoring</p>
+  <hr class="star-light">
+  <span class="skills">Gun Safety - Security - Peace of Mind</span>
+
+</div>
+</header>
 -->
-        
-        <section class="container dash-content">
-            <h1 class=>Your Dashboard</h1>
-            
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                <li role="presentation"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">Edit</a></li>
-            </ul>
 
-          <!-- Tab panes -->
-          <div class="tab-content dash-tabs">
-            <div role="tabpanel" class="tab-pane active" id="home">
-                <guns data="data"></guns>  
-            </div>
-            <div role="tabpanel" class="tab-pane" id="profile">Profile tab!</div>
-            <div role="tabpanel" class="tab-pane" id="edit">Edit tab!</div>
-          </div>
-            
-        
-        </section>
+<section class="container dash-content">
+  <h1 class=>Your Dashboard</h1>
 
-  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+    <li role="presentation"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">Edit</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content dash-tabs">
+    <div role="tabpanel" class="tab-pane active" id="home">
+      <guns data="data"></guns>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+      <svg></svg>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="edit">Edit tab!</div>
+  </div>
 
 
+</section>
+
+<!-- Nav tabs -->
 
 
-        <!-- Footer -->
-        <footer class="text-center">
-            <div class="footer-above">
-                <div class="container">
-                    <div class="row">
-                        <div class="footer-col col-md-4">
-                            <h3>Location</h3>
-                            <p>Coming soon,<br>to a location near you</p>
-                        </div>
-                        <div class="footer-col col-md-4">
-                            <h3>Around the Web</h3>
-                            <ul class="list-inline">
-                                <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="footer-col col-md-4">
-                            <h3>About Gun Loc</h3>
-                            <p><a href="https://github.com/bern422/gun-loc">Gun Loc</a> is a free to use project created by the blood, sweat, and tears of bern, tbone, jraviles, and faiz.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-below">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            Copyright &copy; The Gun Loc Company Corporation Industries Group Inc., LLC 2016
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
-        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-        <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
-            <a class="btn btn-primary" href="#page-top">
-                <i class="fa fa-chevron-up"></i>
-            </a>
+
+<!-- Footer -->
+<footer class="text-center">
+  <div class="footer-above">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col col-md-4">
+          <h3>Location</h3>
+          <p>Coming soon,<br>to a location near you</p>
         </div>
+        <div class="footer-col col-md-4">
+          <h3>Around the Web</h3>
+          <ul class="list-inline">
+            <li>
+              <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+            </li>
+            <li>
+              <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+            </li>
+            <li>
+              <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+            </li>
+            <li>
+              <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-col col-md-4">
+          <h3>About Gun Loc</h3>
+          <p><a href="https://github.com/bern422/gun-loc">Gun Loc</a> is a free to use project created by the blood, sweat, and tears of bern, tbone, jraviles, and faiz.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-below">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          Copyright &copy; The Gun Loc Company Corporation Industries Group Inc., LLC 2016
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+<div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
+  <a class="btn btn-primary" href="#page-top">
+    <i class="fa fa-chevron-up"></i>
+  </a>
+</div>
 
 
 
-        <!-- jQuery -->
-        <script src="/javascripts/jquery.js"></script>
+<!-- jQuery -->
+<script src="/javascripts/jquery.js"></script>
 
-        <!-- Bootstrap Core JavaScript -->
-        <script src="/javascripts/bootstrap.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/javascripts/bootstrap.min.js"></script>
 
-        <!-- Plugin JavaScript -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-        <script src="/javascripts/classie.js"></script>
-        <script src="/javascripts/cbpAnimatedHeader.js"></script>
+<!-- Plugin JavaScript -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="/javascripts/classie.js"></script>
+<script src="/javascripts/cbpAnimatedHeader.js"></script>
 
-        <!-- Contact Form JavaScript -->
-        <script src="/javascripts/jqBootstrapValidation.js"></script>
-        <script src="/javascripts/contact_me.js"></script>
+<!-- Contact Form JavaScript -->
+<script src="/javascripts/jqBootstrapValidation.js"></script>
+<script src="/javascripts/contact_me.js"></script>
 
-        <!-- Custom Theme JavaScript -->
-        <script src="/javascripts/freelancer.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="/javascripts/freelancer.js"></script>
 
-        <!-- Angular -->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-        <script type="text/javascript" src="javascripts/module.js"></script>
-    
+<!-- Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script type="text/javascript" src="javascripts/module.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+// Generate a Bates distribution of 10 random variables.
+var values = d3.range(1000).map(d3.random.bates(10));
+// console.log(values);
+
+var realValues = [];
+$.get('/hit', function(res) {
+  for(i = 0; i < res.length; i++) {
+    // console.log(res[i]["hit_at"]);
+    realValues.push(new Date(res[i]["hit_at"]));
+  }
+  console.log(realValues);
+  restOfCode(realValues);
+});
+
+function restOfCode(realValues) {
+  // A formatter for counts.
+  var formatCount = d3.format(",.0f");
+
+  var margin = {top: 10, right: 30, bottom: 30, left: 30},
+      width = 960 - margin.left - margin.right,
+      height = 550 - margin.top - margin.bottom;
+
+  var x = d3.time.scale()
+      .domain([d3.min(realValues), d3.max(realValues)])
+      .range([0, width]);
+
+  // Generate a histogram using twenty uniformly-spaced bins.
+  var data = d3.layout.histogram()
+      .bins(x.ticks(d3.time.hour, 1))
+      (realValues);
+  console.log(data);
+
+  var y = d3.scale.linear()
+      .domain([0, d3.max(data, function(d) { return d.y; })])
+      .range([height, 0]);
+
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom");
+
+  var svg = d3.select("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var bar = svg.selectAll(".bar")
+      .data(data)
+      .enter().append("g")
+      .attr("class", "bar")
+      .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+  bar.append("rect")
+      .attr("x", 1)
+      .attr("width", (width/12) - 1)
+      .attr("height", function(d) { return height - y(d.y); });
+
+  bar.append("text")
+      .attr("dy", ".75em")
+      .attr("y", 6)
+      .attr("x", x(data[0].dx) / 2)
+      .attr("text-anchor", "middle")
+      .text(function(d) {
+        if (formatCount(d.y) > 5) {
+          return formatCount(d.y);
+        }
+      });
+
+  svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+}
+</script>
+
 </body>
 
 </html>
