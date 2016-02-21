@@ -35,30 +35,34 @@ router.get('/hit', function(req,res,next) {
 });
 
 router.post('/hit', function(req, res, next) {
+  console.log("Hit post");
   Gun.findOne({gun_num: 0}, function(err, gun) {
     if (err) {
       res.send(err);
     } else {
-      if (gun.status == 'alert') {
+      console.log("Gun found");
+      if (gun.status == 'active') {
         var newHit = new Hit({gun_id: gun._id});
         newHit.save(function(err, hit) {
           if (err) {
             res.send(err);
           } else {
             text();
-            toggleStatus(function(something) {
+            makeAlert(function(something) {
               console.log(something);
             });
             res.json(hit);
           }
         });
+      } else {
+        res.send("Gun already on alert please reset");
       }
     }
   });
 });
 
 router.get('/reset', function(req, res, next) {
-  toggleStatus(function(something) {
+  makeActive(function(something) {
     res.json(something);
   });
 });
@@ -151,7 +155,8 @@ router.get('/user', function(req, res, next) {
 
 function text() {
   client.messages.create({
-    to: "+17274224360",
+    // to: "+17274224360",
+    to: "+19546097527",
     from: "+13057832802",
     body: "Somebody has touched your gun"
     // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",
@@ -165,12 +170,10 @@ function text() {
   });
 }
 //active, alert, off
-function toggleStatus(callback) {
+function makeActive(callback) {
   Gun.findOne({gun_num: 0}, function(err, gun) {
       var status = gun.status;
-      if (status.toLowerCase() == 'active') {
-        gun.status = 'alert';
-      } else if (status.toLowerCase() == 'alert') {
+      if (status.toLowerCase() != 'active') {
         gun.status = 'active';
       }
       gun.save(function(err, gun) {
@@ -182,5 +185,22 @@ function toggleStatus(callback) {
       });
   });
 }
+
+function makeAlert(callback) {
+  Gun.findOne({gun_num: 0}, function(err, gun) {
+      var status = gun.status;
+      if (status.toLowerCase() != 'alert') {
+        gun.status = 'alert';
+      }
+      gun.save(function(err, gun) {
+        if (err) {
+          callback(err);
+        } else {
+          callback(gun);
+        }
+      });
+  });
+}
+
 
 module.exports = router;
