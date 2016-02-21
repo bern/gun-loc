@@ -1,0 +1,52 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+mainClassName = "Driver"
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src/'
+    }
+    resources {
+      srcDir 'res/'
+    }
+  }
+}
+
+dependencies {
+  compile project(':nrjavaserial')
+  compile fileTree(dir: 'nrjavaserial', include: ['*.jar'])
+}
+
+repositories {
+  mavenCentral()
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'Driver'
+  }
+  from {
+    configurations.compile.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
+}
+
+task make() {
+  try {
+    Class.forName('com.apple.eawt.FullScreenUtilities');
+  } catch (ClassNotFoundException e) {
+    sourceSets.main.java.exclude('**/OSXCalibrationScreen.java');
+  }
+  tasks.build.execute()
+}
+
+compileJava {
+	options.compilerArgs << "-XDignore.symbol.file=true"
+	options.fork = true
+	options.forkOptions.executable = 'javac'
+}

@@ -1,0 +1,10 @@
+--- clean	2016-02-03 18:52:42.000000000 -0500
++++ nrjavaserial/src/main/c/Makefile	2016-02-03 18:53:58.000000000 -0500
+@@ -11,6 +11,7 @@
+ 
+ OSXJAVAINCLUDE = $(OSXJAVAINCLUDE1) $(OSXJAVAINCLUDE2) $(OSXJAVAINCLUDE3) $(OSXJAVAINCLUDE4) $(OSXJAVAINCLUDE5)		
+ OSXINCLUDE=-I"./include" -I"./include/target"  $(OSXJAVAINCLUDE)
++OSXINCLUDE+=-I/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/include -I/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/include/darwin
+ OSXARCH = -arch i386 -arch x86_64
+ CCOSX=cc $(OSXINCLUDE) $(OSXARCH) -g -O2 -D_BSD_SOURCE -c
+ LINKOSX=cc $(OSXARCH) -dynamiclib -framework JavaVM -framework IOKit -framework CoreFoundation
