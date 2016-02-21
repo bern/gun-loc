@@ -6,7 +6,7 @@ var request = require('superagent');
 var Hit = require('../models/Hit.js');
 var Gun = require('../models/Gun.js');
 var User = require('../models/User.js');
-var Hit = require('../models/FakeHit.js');
+var FakeHit = require('../models/FakeHit.js');
 
 
 // Twilio Credentials
@@ -39,18 +39,20 @@ router.post('/hit', function(req, res, next) {
     if (err) {
       res.send(err);
     } else {
-      var newHit = new Hit({gun_id: gun._id});
-      newHit.save(function(err, hit) {
-        if (err) {
-          res.send(err);
-        } else {
-          text();
-          toggleStatus(function(something) {
-            console.log(something);
-          });
-          res.json(hit);
-        }
-      });
+      if (gun.status != 'alert') {
+        var newHit = new Hit({gun_id: gun._id});
+        newHit.save(function(err, hit) {
+          if (err) {
+            res.send(err);
+          } else {
+            text();
+            toggleStatus(function(something) {
+              console.log(something);
+            });
+            res.json(hit);
+          }
+        });
+      }
     }
   });
 });

@@ -137,6 +137,7 @@
       <guns data="data"></guns>
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
+      <h2>Gun Touches Over A Month</h1>
       <svg></svg>
     </div>
     <div role="tabpanel" class="tab-pane" id="edit">Edit tab!</div>
@@ -235,7 +236,7 @@ var values = d3.range(1000).map(d3.random.bates(10));
 // console.log(values);
 
 var realValues = [];
-$.get('/hit', function(res) {
+$.get('/fakehit', function(res) {
   for(i = 0; i < res.length; i++) {
     // console.log(res[i]["hit_at"]);
     realValues.push(new Date(res[i]["hit_at"]));
@@ -258,7 +259,7 @@ function restOfCode(realValues) {
 
   // Generate a histogram using twenty uniformly-spaced bins.
   var data = d3.layout.histogram()
-      .bins(x.ticks(d3.time.hour, 1))
+      .bins(x.ticks(24))
       (realValues);
   console.log(data);
 
@@ -293,9 +294,7 @@ function restOfCode(realValues) {
       .attr("x", x(data[0].dx) / 2)
       .attr("text-anchor", "middle")
       .text(function(d) {
-        if (formatCount(d.y) > 5) {
-          return formatCount(d.y);
-        }
+        return formatCount(d.y);
       });
 
   svg.append("g")
