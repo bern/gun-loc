@@ -158,7 +158,7 @@ function text() {
     // to: "+17274224360",
     to: "+17274224360",
     from: "+13057832802",
-    body: "We've detected someone tampering with your Colt Expanse M4 housed at 201 N Goodwin Ave Urbana, IL 61801. The timestamp is "+new Date()+"\n\nWe recommend that you get in contact with anyone that might be at that location. If you are unable to reach them, we recommend calling local authorities to that location.\n\nThis is an automated SMS sent by Gun Loc. Please do not respond to this message.",
+    body: "We've detected someone tampering with your Colt Expanse M4 housed at 201 N Goodwin Ave Urbana, IL 61801. The timestamp of the incident is "+new Date()+".\n\nWe recommend that you get in contact with anyone that might be at that location. If you are unable to reach them, we recommend calling local authorities to that location.\n\nThis is an automated SMS sent by Gun Loc. Please do not respond to this message.",
     // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",
   }, function(err, message) {
       if (err) {
@@ -166,7 +166,7 @@ function text() {
       } else {
         console.log(message.sid);
         console.log("Text sent");
-      }
+      } 
   });
 }
 //active, alert, off
