@@ -86,7 +86,7 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
     }
     
     $scope.gunReset = function(gun) {
-        gun.status = "active";
+        //gun.status = "active";
         $scope.reset();
     }
     
