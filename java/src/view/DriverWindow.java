@@ -46,7 +46,7 @@ public class DriverWindow extends JFrame {
 
     // Window
     this.pack();
-    this.setTitle("Smartboard Driver");
+    this.setTitle("Gun-loc");
     this.setLocationRelativeTo(null);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }

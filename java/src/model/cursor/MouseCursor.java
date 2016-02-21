@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -34,11 +35,16 @@ public class MouseCursor extends Cursor {
   protected void handleMouseUpdate(Point mouse) {
     HttpURLConnection connection = null;
     try {
-      URL url = new URL("http://ba22da7e.ngrok.io/hit");
+      URL url = new URL("http://gun-loc.azurewebsites.net/hit");
       connection = (HttpURLConnection) url.openConnection();
+      connection.setRequestProperty("Content-Length", "0");
       connection.setRequestMethod("POST");
       connection.setUseCaches(false);
       connection.setDoOutput(true);
+
+      OutputStream o = connection.getOutputStream();
+      o.write("Ow".getBytes());
+      o.close();
       
       InputStream is = connection.getInputStream();
       BufferedReader rd = new BufferedReader(new InputStreamReader(is));
