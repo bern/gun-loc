@@ -44,15 +44,9 @@ module.controller('appController', ['$scope', function($scope) {
           }
       ]
     };
-    
-}]);
 
-module.directive('guns', function() {
-    return {
-        restrict: "EA",
-        scope: {
-            data: '='
-        },
-        templateUrl : "templates/gun-template.html"
-    };
-})
+    $scope.enableGun = function(gun) {
+        gun.status="active";
+        //tell database this
+    }
+}]);
