@@ -11,7 +11,7 @@ var users = require('./routes/users');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/gun-loc', function (err) {
+mongoose.connect('mongodb://user:pass@ds062898.mongolab.com:62898/gun-loc', function (err) {
   if (err) {
     console.log("Connection err", err);
   }
