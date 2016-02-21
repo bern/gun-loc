@@ -1,0 +1,2 @@
+TO APPLY DESIRED PATCH
+patch -p 0 -d .. < [os].patch
