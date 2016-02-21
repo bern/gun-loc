@@ -169,7 +169,64 @@
               <h2>Touches This Year</h2>
               <svg></svg>
             </div>
-            <div role="tabpanel" class="tab-pane" id="edit">Edit tab!</div>
+            <div role="tabpanel" class="tab-pane" id="edit">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
+                  <div class="col-sm-10">
+                    <input type="username" class="form-control" id="inputUsername3" ng-model="data.username">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                  <div class="col-sm-10">
+                    <input type="password" class="form-control" id="inputPassword3" ng-model="data.password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputFirearmLicenseNumber3" class="col-sm-2 control-label">Firearm License Number</label>
+                  <div class="col-sm-10">
+                    <input type="firearmLicenseNumber" class="form-control" id="inputFirearmLicenseNumber3" ng-model="data.information.firearm_licensee_num">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPhoneNumber3" class="col-sm-2 control-label">Phone Number</label>
+                  <div class="col-sm-10">
+                    <input type="phoneNumber" class="form-control" id="inputPhoneNumber3" ng-model="data.information.licensee_phone_num">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputStreetAddress3" class="col-sm-2 control-label">Street Address</label>
+                  <div class="col-sm-10">
+                    <input type="streetAddress" class="form-control" id="inputStreetAddress3" ng-model="data.information.street_address">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">City</label>
+                  <div class="col-sm-10">
+                    <input type="city" class="form-control" id="inputCity3" ng-model="data.information.city">
+                  </div>
+                </div>
+                <!--<div class="form-group">
+                  <label for="inputState3" class="col-sm-2 control-label">State</label>
+                  <div class="col-sm-10">
+                    <input type="state" class="form-control" id="inputState3" ng-model="data.information.state">
+                  </div>
+                </div>-->
+                <div class="form-group">
+                  <label for="inputState3" class="col-sm-2 control-label">State</label>
+                  <div class="col-sm-10">
+                    <input type="state" class="form-control" id="inputState3" ng-model="data.information.state">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputZipcode3" class="col-sm-2 control-label">Zipcode</label>
+                  <div class="col-sm-10">
+                    <input type="zipcode" class="form-control" id="inputZipcode3" ng-model="data.information.zip">
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
 
 
@@ -259,16 +316,20 @@
 <script type="text/javascript" src="javascripts/module.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
+var flag = false;
 function makeMagic() {
-  var realValues = [];
-  $.get('/fakehit', function(res) {
-    for(i = 0; i < res.length; i++) {
-      // console.log(res[i]["hit_at"]);
-      realValues.push(new Date(res[i]["hit_at"]));
-    }
-    console.log(realValues);
-    restOfCode(realValues);
-  });
+  if(flag === false) {
+    flag = true;
+    var realValues = [];
+    $.get('/fakehit', function(res) {
+      for(i = 0; i < res.length; i++) {
+        // console.log(res[i]["hit_at"]);
+        realValues.push(new Date(res[i]["hit_at"]));
+      }
+      console.log(realValues);
+      restOfCode(realValues);
+    });
+  }
 }
 // Generate a Bates distribution of 10 random variables.
 var values = d3.range(1000).map(d3.random.bates(10));
