@@ -75,8 +75,13 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
           }
       ];
 
-    $scope.enableGun = function(gun) {
+    $scope.gunActive = function(gun) {
         gun.status="active";
+        //tell database this
+    }
+    
+    $scope.gunOff = function(gun) {
+        gun.status="off";
         //tell database this
     }
     

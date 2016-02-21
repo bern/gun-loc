@@ -158,7 +158,9 @@
                       <div class="gun-item gun-enable">
 <!--                        <button class="btn btn-gunloc" ng-click='enableGun(gun)'>Enable</button>-->
 <!--                          TESTING DATA FETCH-->
-                          <button class="btn btn-gunloc" ng-click='getData()'>Enable</button>
+                          <button class="btn btn-gunloc" ng-click='gunActive(gun)' ng-show="gun.status == 'off'">Enable</button>
+                          <button class="btn btn-gunloc" ng-click='gunOff(gun)' ng-show="gun.status == 'active'">Disable</button>
+                          <button class="btn btn-gunloc" ng-click='gunActive(gun)' ng-show="gun.status == 'alert'">Reset</button>
                       </div>
                   </div>
                 </div>
