@@ -122,7 +122,7 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
     
     $scope.pollDB = function (message) {
         
-        var intervalPeriod = 500000;
+        var intervalPeriod = 1000;
         
         var rep = $interval(function () {
             $scope.getData();
