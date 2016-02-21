@@ -174,127 +174,55 @@
                 <div class="form-group">
                   <label for="inputUsername3" class="col-sm-2 control-label">Username</label>
                   <div class="col-sm-10">
-                    <input type="username" class="form-control" id="inputUsername3" value="{{data.username}}">
+                    <input type="username" class="form-control" id="inputUsername3" ng-model="data.username">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" value="{{data.password}}">
+                    <input type="password" class="form-control" id="inputPassword3" ng-model="data.password">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputFirearmLicenseNumber3" class="col-sm-2 control-label">Firearm License Number</label>
                   <div class="col-sm-10">
-                    <input type="firearmLicenseNumber" class="form-control" id="inputFirearmLicenseNumber3" value="{{data.information.firearm_licensee_num}}">
+                    <input type="firearmLicenseNumber" class="form-control" id="inputFirearmLicenseNumber3" ng-model="data.information.firearm_licensee_num">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPhoneNumber3" class="col-sm-2 control-label">Phone Number</label>
                   <div class="col-sm-10">
-                    <input type="phoneNumber" class="form-control" id="inputPhoneNumber3" value="{{data.information.licensee_phone_num}}">
+                    <input type="phoneNumber" class="form-control" id="inputPhoneNumber3" ng-model="data.information.licensee_phone_num">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputStreetAddress3" class="col-sm-2 control-label">Street Address</label>
                   <div class="col-sm-10">
-                    <input type="streetAddress" class="form-control" id="inputStreetAddress3" value="{{data.information.street_address}}">
+                    <input type="streetAddress" class="form-control" id="inputStreetAddress3" ng-model="data.information.street_address">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">City</label>
                   <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputCity3" value="{{data.information.city}}">
+                    <input type="password" class="form-control" id="inputCity3" ng-model="data.information.city">
                   </div>
                 </div>
                 <!--<div class="form-group">
                   <label for="inputState3" class="col-sm-2 control-label">State</label>
                   <div class="col-sm-10">
-                    <input type="state" class="form-control" id="inputState3" value="{{data.information.state}}">
+                    <input type="state" class="form-control" id="inputState3" ng-model="data.information.state">
                   </div>
                 </div>-->
                 <div class="form-group">
                   <label for="inputState3" class="col-sm-2 control-label">State</label>
-                  <div class="dropdown col-sm-10">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                      State
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" 
-                      style="height: auto; max-height: 200px; overflow-x: hidden;"
-                    >
-                      <li><a href="#">AL</a></li>
-                      <li><a href="#">AK</a></li>
-                      <li><a href="#">AZ</a></li>
-                      <li><a href="#">AR</a></li>
-                      <li><a href="#">CA</a></li>
-                      <li><a href="#">CO</a></li>
-                      <li><a href="#">CT</a></li>
-                      <li><a href="#">DE</a></li>
-                      <li><a href="#">DC</a></li>
-                      <li><a href="#">FL</a></li>
-                      <li><a href="#">GA</a></li>
-                      <li><a href="#">HI</a></li>
-                      <li><a href="#">ID</a></li>
-                      <li><a href="#">IL</a></li>
-                      <li><a href="#">IN</a></li>
-                      <li><a href="#">IA</a></li>
-                      <li><a href="#">KS</a></li>
-                      <li><a href="#">KY</a></li>
-                      <li><a href="#">LA</a></li>
-                      <li><a href="#">ME</a></li>
-                      <li><a href="#">MD</a></li>
-                      <li><a href="#">MA</a></li>
-                      <li><a href="#">MI</a></li>
-                      <li><a href="#">MN</a></li>
-                      <li><a href="#">MS</a></li>
-                      <li><a href="#">MO</a></li>
-                      <li><a href="#">MT</a></li>
-                      <li><a href="#">NE</a></li>
-                      <li><a href="#">NV</a></li>
-                      <li><a href="#">NH</a></li>
-                      <li><a href="#">NJ</a></li>
-                      <li><a href="#">NM</a></li>
-                      <li><a href="#">NY</a></li>
-                      <li><a href="#">NC</a></li>
-                      <li><a href="#">ND</a></li>
-                      <li><a href="#">OH</a></li>
-                      <li><a href="#">OK</a></li>
-                      <li><a href="#">OR</a></li>
-                      <li><a href="#">PA</a></li>
-                      <li><a href="#">RI</a></li>
-                      <li><a href="#">SC</a></li>
-                      <li><a href="#">SD</a></li>
-                      <li><a href="#">TN</a></li>
-                      <li><a href="#">TX</a></li>
-                      <li><a href="#">UT</a></li>
-                      <li><a href="#">VT</a></li>
-                      <li><a href="#">VA</a></li>
-                      <li><a href="#">WA</a></li>
-                      <li><a href="#">WV</a></li>
-                      <li><a href="#">WI</a></li>
-                      <li><a href="#">WY</a></li>
-                    </ul>
+                  <div class="col-sm-10">
+                    <input type="state" class="form-control" id="inputState3" ng-model="data.information.state">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputZipcode3" class="col-sm-2 control-label">Zipcode</label>
                   <div class="col-sm-10">
-                    <input type="zipcode" class="form-control" id="inputZipcode3" value="{{data.information.zip}}">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Remember me
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Sign in</button>
+                    <input type="zipcode" class="form-control" id="inputZipcode3" ng-model="data.information.zip">
                   </div>
                 </div>
               </form>
