@@ -39,7 +39,7 @@ router.post('/hit', function(req, res, next) {
     if (err) {
       res.send(err);
     } else {
-      if (gun.status != 'alert') {
+      if (gun.status == 'alert') {
         var newHit = new Hit({gun_id: gun._id});
         newHit.save(function(err, hit) {
           if (err) {
