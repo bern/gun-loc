@@ -291,6 +291,7 @@ header .intro-text .skills {
 
 .navbar a:focus {
     outline: 0;
+    color: white;
 }
 
 .navbar .navbar-nav {
@@ -796,3 +797,10 @@ hr.off-primary:after {
     width: 100px;
 }
 
+.iot:hover {
+    color: #FFB065 !important;
+}
+
+.navbar-default .navbar-brand:focus {
+    color: white;
+}

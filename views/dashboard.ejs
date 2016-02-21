@@ -97,7 +97,7 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="index.ejs">Home</a>
+                            <a href="/">Home</a>
                         </li>
                     </ul>
                 </div>
@@ -316,16 +316,20 @@
 <script type="text/javascript" src="javascripts/module.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
+var flag = false;
 function makeMagic() {
-  var realValues = [];
-  $.get('/fakehit', function(res) {
-    for(i = 0; i < res.length; i++) {
-      // console.log(res[i]["hit_at"]);
-      realValues.push(new Date(res[i]["hit_at"]));
-    }
-    console.log(realValues);
-    restOfCode(realValues);
-  });
+  if(flag === false) {
+    flag = true;
+    var realValues = [];
+    $.get('/fakehit', function(res) {
+      for(i = 0; i < res.length; i++) {
+        // console.log(res[i]["hit_at"]);
+        realValues.push(new Date(res[i]["hit_at"]));
+      }
+      console.log(realValues);
+      restOfCode(realValues);
+    });
+  }
 }
 // Generate a Bates distribution of 10 random variables.
 var values = d3.range(1000).map(d3.random.bates(10));
