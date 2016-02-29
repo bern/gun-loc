@@ -15,6 +15,10 @@ var authToken = '1395cba102935ce1dacce830c35ab3d7';
 //require the Twilio module and create a REST client
 var client = require('twilio')('AC544ce6ea7b29c8e2dea462fa0a21de17', '1395cba102935ce1dacce830c35ab3d7');
 
+var api_key = 'key-73bcc4a3cf8233071f7471b6579d4426';
+var domain = 'sandboxd7db69b069af4337a18b514bb0f7a12d.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -48,6 +52,7 @@ router.post('/hit', function(req, res, next) {
             res.send(err);
           } else {
             text();
+            email();
             makeAlert(function(something) {
               console.log(something);
             });
@@ -156,7 +161,7 @@ router.get('/user', function(req, res, next) {
 function text() {
   client.messages.create({
     // to: "+17274224360",
-    to: "+17274224360",
+    to: "+19546097527",
     from: "+13057832802",
     body: "We've detected someone tampering with your Colt Expanse M4 housed at 201 N Goodwin Ave Urbana, IL 61801. The timestamp of the incident is "+new Date()+".\n\nWe recommend that you get in contact with anyone that might be at that location. If you are unable to reach them, we recommend calling local authorities to that location.\n\nThis is an automated SMS sent by Gun Loc. Please do not respond to this message.",
     // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",
@@ -166,7 +171,7 @@ function text() {
       } else {
         console.log(message.sid);
         console.log("Text sent");
-      } 
+      }
   });
 }
 //active, alert, off
@@ -199,6 +204,19 @@ function makeAlert(callback) {
           callback(gun);
         }
       });
+  });
+}
+
+function email() {
+  var data = {
+    from: 'Gun-Loc <me@sandboxd7db69b069af4337a18b514bb0f7a12d.mailgun.org>',
+    to: 'gunloctest@outlook.com',
+    subject: 'ALERT',
+    text: "We've detected someone tampering with your Colt Expanse M4 housed at 201 N Goodwin Ave Urbana, IL 61801. The timestamp of the incident is "+new Date()+".\n\nWe recommend that you get in contact with anyone that might be at that location. If you are unable to reach them, we recommend calling local authorities to that location.\n\nThis is an automated message sent by Gun Loc. Please do not respond to this message."
+  };
+
+  mailgun.messages().send(data, function (error, body) {
+    console.log(body);
   });
 }
 
