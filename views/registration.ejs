@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Page</title>
+</head>
+<body>
+  <h1>CREATE A NEW USER PROFILE</h1>
+  <form action="javascript:register()">
+    <div><label>Email: </label><input id="email" type="email" required></div>
+    <div><label>Password: </label><input id="password" type="password" required></div>
+    <div><label>Firearm Licensee Number: </label><input id="flnum" type="number" required></div>
+    <div><label>Licensee Phone Number: </label><input id="lpnum" type="tel" required></div>
+    <div><label>Street Address: </label><input id="street" type="text" required></div>
+    <div><label>City: </label><input id="city" type="text" required></div>
+    <div><label>State: </label><input id="state" type="text" required></div>
+    <div><label>Zip/Postal Code: </label><input id="zip" type="text" required></div>
+    <input type="submit" value="Register">
+  </form>
+  <div class="error" style="color:red;">
+
+  </div>
+
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript">
+    function register() {
+      var data = {};
+      data.email = $("#email").val();
+      data.password = $("#password").val();
+      data.information = {};
+      data.information.firearm_licensee_num = $("#flnum").val();
+      data.information.licensee_phone_num = $("#lpnum").val();
+      data.information.street_address = $("#street").val();
+      data.information.city = $("#city").val();
+      data.information.state = $("#state").val();
+      data.information.zip = $("#zip").val();
+      $.ajax({
+        "url": '/register',
+        "type": 'post',
+        "data": JSON.stringify(data),
+        "contentType": "application/json",
+        success: function(result) {
+          console.log(result.found);
+          if (result.found) {
+            $(".error").html("<h3>This email is already in use</h3>");
+          } else {
+            $(".error").html("");
+            window.location.replace("/dashboard");
+          }
+        },
+        error: function(e) {
+          console.error(e);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

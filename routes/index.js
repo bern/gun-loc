@@ -13,7 +13,7 @@ var FakeHit = require('../models/FakeHit.js');
 var accountSid = 'AC544ce6ea7b29c8e2dea462fa0a21de17';
 var authToken = '1395cba102935ce1dacce830c35ab3d7';
 //require the Twilio module and create a REST client
-var client = require('twilio')('AC544ce6ea7b29c8e2dea462fa0a21de17', '1395cba102935ce1dacce830c35ab3d7');
+var client = require('twilio')(accountSid, authToken);
 
 var api_key = 'key-73bcc4a3cf8233071f7471b6579d4426';
 var domain = 'sandboxd7db69b069af4337a18b514bb0f7a12d.mailgun.org';
@@ -26,6 +26,10 @@ router.get('/', function(req, res, next) {
 
 router.get('/dashboard', function(req, res, next) {
   res.render('dashboard', {});
+});
+
+router.get('/register', function(req, res, next) {
+  res.render('registration', {});
 });
 
 router.get('/hit', function(req,res,next) {
@@ -62,6 +66,46 @@ router.post('/hit', function(req, res, next) {
       } else {
         res.send("Gun already on alert please reset");
       }
+    }
+  });
+});
+
+router.post('/register', function(req, res, next) {
+  var bod = req.body;
+  bod.password = hashCode(bod.password);
+  User.findOne({email: bod.email}, function(err, foundUser) {
+    if (err) {
+      res.status(500).send(err);
+    }
+    if (foundUser) {
+      res.json({found: true});
+    } else {
+      var usr = new User(bod);
+      usr.save(function(err, newUser) {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            req.session.userID = newUser._id;
+            res.json({found: false});
+          }
+      });
+    }
+  });
+});
+
+router.post('/login', function(req, res, next) {
+  var bod = req.body;
+  console.log(bod);
+  User.findOne({email: bod.email}, function(err, foundUser) {
+    if (foundUser) {
+      var curPass = hashCode(bod.password);
+      if (curPass == foundUser.password) {
+        res.json({gucci: true});
+      } else {
+        res.json({gucci: false});
+      }
+    } else {
+      res.json({gucci: false});
     }
   });
 });

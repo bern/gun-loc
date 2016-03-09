@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -16,6 +17,7 @@ mongoose.connect('mongodb://user:pass@ds062898.mongolab.com:62898/gun-loc', func
     console.log("Connection err", err);
   }
 });
+// mongoose.connect('mongodb://localhost/gun-loc');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +25,9 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(session({secret: '<mysecret>',
+                 saveUninitialized: true,
+                 resave: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

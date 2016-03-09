@@ -223,11 +223,11 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                     <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                    <form name="sentMessage" id="loginForm" novalidate>
+                    <form action="javascript:login()">
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Email</label>
-                                <input type="email" class="form-control" placeholder="Email" id="name" required data-validation-required-message="Please enter your email.">
+                                <input type="email" class="form-control" placeholder="Email" name="email" required data-validation-required-message="Please enter your email." id="email">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -242,10 +242,14 @@
                         <div id="success"></div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <a href="/dashboard" type="submit" class="btn btn-lg btn-gunloc" >Log in</a>
+                                <input type="submit" class="btn btn-lg btn-gunloc" value="Log In">
                             </div>
                         </div>
                     </form>
+                    <div id="error" style="color:red;">
+
+                    </div>
+                    <p>Don't have an account? <a href="/register">Register here!</a></p>
                 </div>
             </div>
         </div>
@@ -556,6 +560,31 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="/javascripts/freelancer.js"></script>
+    <script type="text/javascript">
+      function login() {
+        var data = {};
+        data.email = $("#email").val();
+        data.password = $("#password").val();
+        console.log(data);
+        $.ajax({
+          url: 'login',
+          type: 'post',
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          error: function(e) {
+            console.log(e);
+          },
+          success: function(result) {
+            console.log(result);
+            if (result.gucci) {
+              window.location.replace('/dashboard');
+            } else {
+              $("#error").html("<h3>Email/Password Combination Incorrect</h3>");
+            }
+          }
+        });
+      }
+    </script>
 
 </body>
 
