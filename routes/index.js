@@ -25,7 +25,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/dashboard', function(req, res, next) {
-  res.render('dashboard', {});
+  if (req.session.userID) {
+    res.render('dashboard', {});
+  } else {
+    res.redirect('/');
+  }
 });
 
 router.get('/register', function(req, res, next) {
@@ -40,6 +44,12 @@ router.get('/hit', function(req,res,next) {
       res.json(hits);
     }
   });
+});
+
+router.get('/logout', function(req, res, next) {
+  req.session.destroy();
+  console.log("Logout");
+  res.send("logout successful");
 });
 
 router.post('/hit', function(req, res, next) {
@@ -100,6 +110,7 @@ router.post('/login', function(req, res, next) {
     if (foundUser) {
       var curPass = hashCode(bod.password);
       if (curPass == foundUser.password) {
+        req.session.userID = foundUser._id;
         res.json({gucci: true});
       } else {
         res.json({gucci: false});

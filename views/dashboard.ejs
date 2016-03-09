@@ -97,7 +97,7 @@
                             <a href="#page-top"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="/">Home</a>
+                            <button onclick="logout()">Logout</button>
                         </li>
                     </ul>
                 </div>
@@ -316,6 +316,13 @@
 <script type="text/javascript" src="javascripts/module.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
+function logout() {
+  $.get("/logout", function(e) {
+    window.location.replace("/");
+  });
+}
+
+
 var flag = false;
 function makeMagic() {
   if(flag === false) {
