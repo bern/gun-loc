@@ -87,6 +87,9 @@
                     <li class="page-scroll">
                         <a href="#login">Login</a>
                     </li>
+                    <li class="page-scroll">
+                        <a href="/register">Register</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -268,19 +271,13 @@
                         <h3>Around the Web</h3>
                         <ul class="list-inline">
                             <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                                <a href="https://github.com/bern422/gun-loc" class="btn-social btn-outline"><i class="fa fa-fw fa-github"></i></a>
                             </li>
                             <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                                <a href="http://devpost.com/software/gun-loc" class="btn-social btn-outline"><i class="fa fa-fw fa-info-circle"></i></a>
                             </li>
                             <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                                <a href="https://www.youtube.com/watch?v=NY1UjJgJVDI" class="btn-social btn-outline"><i class="fa fa-fw fa-youtube"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -565,6 +562,7 @@
         var data = {};
         data.email = $("#email").val();
         data.password = $("#password").val();
+        $("#error").hide();
         $.ajax({
           url: 'login',
           type: 'post',
@@ -578,6 +576,7 @@
             if (result.gucci) {
               window.location.replace('/dashboard');
             } else {
+              $("#error").show();
               $("#error").html("<h3>Email/Password Combination Incorrect</h3>");
             }
           }
