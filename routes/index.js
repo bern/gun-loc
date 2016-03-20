@@ -56,9 +56,9 @@ router.get('/logout', function(req, res, next) {
   res.send("logout successful");
 });
 
-router.post('/hit', function(req, res, next) {
+router.post('/hit/:id', function(req, res, next) {
   console.log("Hit post");
-  Gun.findOne({gun_num: 0}, function(err, gun) {
+  Gun.findOne({'_id': req.params.id}, function(err, gun) {
     if (err) {
       res.send(err);
     } else {
@@ -69,9 +69,11 @@ router.post('/hit', function(req, res, next) {
           if (err) {
             res.send(err);
           } else {
-            text();
-            email();
-            makeAlert(function(something) {
+            User.findOne({"_id": gun.userID}, function(err, usr) {
+              text(usr.information.licensee_phone_num);
+              email();
+            });
+            makeAlert(gun, function(something) {
               console.log(something);
             });
             res.json(hit);
@@ -163,6 +165,7 @@ router.post('/gun', function(req, res, next) {
   if (req.session.userID) {
     var gunObj = req.body;
     gunObj.userID = req.session.userID;
+    gunObj.status = 'active';
     var newGun = new Gun(gunObj);
     newGun.save(function(err, gun) {
       if (err) {
@@ -227,10 +230,10 @@ router.get('/user', function(req, res, next) {
   }
 });
 
-function text() {
+function text(number) {
   client.messages.create({
     // to: "+17274224360",
-    to: "+19546097527",
+    to: number,
     from: "+13057832802",
     body: "We've detected someone tampering with your Colt Expanse M4 housed at 201 N Goodwin Ave Urbana, IL 61801. The timestamp of the incident is "+new Date()+".\n\nWe recommend that you get in contact with anyone that might be at that location. If you are unable to reach them, we recommend calling local authorities to that location.\n\nThis is an automated SMS sent by Gun Loc. Please do not respond to this message.",
     // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",
@@ -260,19 +263,17 @@ function makeActive(callback) {
   });
 }
 
-function makeAlert(callback) {
-  Gun.findOne({gun_num: 0}, function(err, gun) {
-      var status = gun.status;
-      if (status.toLowerCase() != 'alert') {
-        gun.status = 'alert';
-      }
-      gun.save(function(err, gun) {
-        if (err) {
-          callback(err);
-        } else {
-          callback(gun);
-        }
-      });
+function makeAlert(hitGun, callback) {
+  var status = hitGun.status;
+  if (status.toLowerCase() != 'alert') {
+    hitGun.status = 'alert';
+  }
+  hitGun.save(function(err, gun) {
+    if (err) {
+      callback(err);
+    } else {
+      callback(gun);
+    }
   });
 }
 
