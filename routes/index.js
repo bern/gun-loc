@@ -70,8 +70,8 @@ router.post('/hit/:id', function(req, res, next) {
             res.send(err);
           } else {
             User.findOne({"_id": gun.userID}, function(err, usr) {
-              text(usr.information.licensee_phone_num);
-              email();
+              text(usr, gun);
+              // email();
             });
             makeAlert(gun, function(something) {
               console.log(something);
@@ -180,13 +180,17 @@ router.post('/gun', function(req, res, next) {
 });
 
 router.get('/gun', function(req, res, next) {
-  Gun.find({'userID': req.session.userID},function(err, guns) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(guns);
-    }
-  });
+  if (req.session.userID) {
+    Gun.find({'userID': req.session.userID},function(err, guns) {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(guns);
+      }
+    });
+  } else {
+    res.send("Not logged in");
+  }
 });
 
 // router.get('/text', function(req, res, next) {
@@ -230,12 +234,15 @@ router.get('/user', function(req, res, next) {
   }
 });
 
-function text(number) {
+function text(user, gun) {
+  var number = user.information.licensee_phone_num;
+  var gunName = gun.manufacturer + " " + gun.model;
+  var address = user.information.street_address + " " + user.information.city + ", " + user.information.state + " " + user.information.zip;
   client.messages.create({
     // to: "+17274224360",
     to: number,
     from: "+13057832802",
-    body: "We've detected someone tampering with your Colt Expanse M4 housed at 201 N Goodwin Ave Urbana, IL 61801. The timestamp of the incident is "+new Date()+".\n\nWe recommend that you get in contact with anyone that might be at that location. If you are unable to reach them, we recommend calling local authorities to that location.\n\nThis is an automated SMS sent by Gun Loc. Please do not respond to this message.",
+    body: "We've detected someone tampering with your " + gunName + " housed at " + address + ". The timestamp of the incident is "+new Date()+".\n\nWe recommend that you get in contact with anyone that might be at that location. If you are unable to reach them, we recommend calling local authorities to that location.\n\nThis is an automated SMS sent by Gun Loc. Please do not respond to this message.",
     // mediaUrl: "http://farm2.static.flickr.com/1075/1404618563_3ed9a44a3a.jpg",
   }, function(err, message) {
       if (err) {
