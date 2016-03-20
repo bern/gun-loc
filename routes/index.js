@@ -21,7 +21,11 @@ var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  if (req.session.userID) {
+    res.redirect('/dashboard');
+  } else {
+    res.render('index', { title: 'Express' });
+  }
 });
 
 router.get('/dashboard', function(req, res, next) {
@@ -204,13 +208,17 @@ router.post('/user', function(req,res,next) {
 });
 
 router.get('/user', function(req, res, next) {
-  User.find(function(err, users) {
-    if (err) {
-      res.json(err);
-    } else {
-      res.json(users);
-    }
-  });
+  if (req.session.userID) {
+    User.findOne({'_id': req.session.userID},function(err, users) {
+      if (err) {
+        res.json(err);
+      } else {
+        res.json(users);
+      }
+    });
+  } else {
+    res.send("Not logged in");
+  }
 });
 
 function text() {
