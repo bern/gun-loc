@@ -180,7 +180,7 @@ router.post('/gun', function(req, res, next) {
 });
 
 router.get('/gun', function(req, res, next) {
-  Gun.find(function(err, guns) {
+  Gun.find({'userID': req.session.userID},function(err, guns) {
     if (err) {
       res.json(err);
     } else {
