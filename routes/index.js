@@ -160,14 +160,20 @@ router.get('/fakehit', function(req,res,next) {
 
 
 router.post('/gun', function(req, res, next) {
-  var newGun = new Gun(req.body);
-  newGun.save(function(err, gun) {
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(gun);
-    }
-  });
+  if (req.session.userID) {
+    var gunObj = req.body;
+    gunObj.userID = req.session.userID;
+    var newGun = new Gun(gunObj);
+    newGun.save(function(err, gun) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(gun);
+      }
+    });
+  } else {
+    res.send("Not logged in");
+  }
 });
 
 router.get('/gun', function(req, res, next) {
