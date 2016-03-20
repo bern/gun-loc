@@ -232,53 +232,50 @@
                 <h2>New Gun</h2>
                 <form class="form-horizontal">
                     <div class="form-group">
-                      <label for="inputAcquisitionDate" class="col-sm-2 control-label">Acquisition Date</label>
+                      <label for="newAcquisitionDate" class="col-sm-2 control-label">Acquisition Date</label>
                       <div class="col-sm-10">
-                        <input type="date" class="form-control" id="inputAcquisitionDate">
+                        <input type="date" class="form-control" id="newAcquisitionDate">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputFirearmType" class="col-sm-2 control-label">Firearm Type</label>
+                      <label for="newFirearmType" class="col-sm-2 control-label">Firearm Type</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputAcquisitionDate">
+                        <input type="text" class="form-control" id="newFirearmType">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputManufacturer" class="col-sm-2 control-label">Manufacturer</label>
+                      <label for="newManufacturer" class="col-sm-2 control-label">Manufacturer</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputManufacturer">
+                        <input type="text" class="form-control" id="newManufacturer">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputModel" class="col-sm-2 control-label">Gun Model</label>
+                      <label for="newModel" class="col-sm-2 control-label">Gun Model</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputModel">
+                        <input type="text" class="form-control" id="newModel">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputCaliber" class="col-sm-2 control-label">Caliber/Guage</label>
+                      <label for="newCaliber" class="col-sm-2 control-label">Caliber/Guage</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputCaliber">
+                        <input type="text" class="form-control" id="newCaliber">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputSerial" class="col-sm-2 control-label">Serial Number</label>
+                      <label for="newSerial" class="col-sm-2 control-label">Serial Number</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputSerial">
+                        <input type="text" class="form-control" id="newSerial">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputModel" class="col-sm-2 control-label">Gun Model</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputModel">
-                      </div>
-                    </div>
-                    <div class="form-group">
+<!--
                       <div class="col-sm-2">
-                        <input type="submit" class="form-control" id="inputSubmit" value="Submit">
+                        <input type="submit" class="form-control" id="inputSubmit" value="Submit" onClick="newGun()">
                       </div>
+-->
                     </div>
                 </form>
+                <button class="btn btn-default btn-gunloc" onClick="newGun()">Submit</button>
             </div>
           </div>
 
@@ -393,6 +390,33 @@ function makeMagic() {
 }
 // Generate a Bates distribution of 10 random variables.
 var values = d3.range(1000).map(d3.random.bates(10));
+    
+var newGun = function() {
+    var newGunData = {};
+    newGunData.acquisition_date = $("#newAcquisitionDate").val();
+    newGunData.firearm_type = $("#newFirearmType").val();
+    newGunData.manufacturer = $("#newManufacturer").val();
+    newGunData.model = $("#newModel").val();
+    newGunData.caliber_gauge = $("#newCaliber").val();
+    newGunData.serial_num = $("#newSerial").val();
+    
+    
+    $.ajax({
+          url: '/gun',
+          type: 'post',
+          data: JSON.stringify(newGunData),
+          contentType: "application/json",
+          error: function(e) {
+            console.log(e);
+          },
+          success: function(result) {
+            console.log(result);
+            $("#error").show();
+            $("#error").html("<h3>Something went wrong making a new gun</h3>");
+          }
+        });
+    
+}
 // console.log(values);
 
 function restOfCode(realValues) {
