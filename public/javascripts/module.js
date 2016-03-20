@@ -2,6 +2,8 @@ var module = angular.module('app', []);
 
 module.controller('appController', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
     
+    $scope.userData = [];
+    
     $scope.data = {
       "username": "johndoe",
       "password": "yolo",
@@ -90,6 +92,21 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
         $scope.reset();
     }
     
+    $scope.getUserInfo = function() {
+        console.log("Fetching user info...");
+        $http({
+          method: 'GET',
+          url: '/user'
+        }).then(function successCallback(response) {
+            console.log("Success!");
+            console.log(response);
+            $scope.data = response.data;
+          }, function errorCallback(response) {
+            console.log("Oops...");
+            console.log(response);
+        });
+    }
+    
     $scope.getData = function() {
         console.log("Fetching data...");
         $http({
@@ -122,7 +139,7 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
     
     $scope.pollDB = function (message) {
         
-        var intervalPeriod = 1000;
+        var intervalPeriod = 10000;
         
         var rep = $interval(function () {
             $scope.getData();
@@ -131,6 +148,7 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
     }
     
     var init = function() {
+        $scope.getUserInfo();
         $scope.getData();
         $scope.pollDB();
     };
