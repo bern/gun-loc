@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
     street_address: String,
     city: String,
     state: String,
-    zip: Number
+    zip: String
   }
 });
 
