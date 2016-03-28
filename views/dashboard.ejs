@@ -96,8 +96,15 @@
                         <li class="hidden">
                             <a href="#page-top"></a>
                         </li>
+<!--
                         <li class="page-scroll">
                             <button onclick="logout()">Logout</button>
+                        </li>
+-->
+                        <li class="page-scroll logoutbutton">
+                            
+                                <a onclick="logout()">Logout</a>
+                            
                         </li>
                     </ul>
                 </div>
@@ -230,7 +237,7 @@
             </div>
             <div role="tabpanel" class="tab-pane" id="manage">
                 <h2>New Gun</h2>
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="newGunForm">
                     <div class="form-group">
                       <label for="newAcquisitionDate" class="col-sm-2 control-label">Acquisition Date</label>
                       <div class="col-sm-10">
@@ -273,6 +280,13 @@
                         <input type="submit" class="form-control" id="inputSubmit" value="Submit" onClick="newGun()">
                       </div>
 -->
+                    </div>
+                    <div class="error" style="color: red" id="newGunError">
+                        
+                    </div>
+                    
+                    <div class="error" style="color: green" id="newGunSuccess">
+                        
                     </div>
                 </form>
                 <button class="btn btn-default btn-gunloc" onClick="newGun()">Submit</button>
@@ -400,6 +414,17 @@ var newGun = function() {
     newGunData.caliber_gauge = $("#newCaliber").val();
     newGunData.serial_num = $("#newSerial").val();
     
+    if (newGunData.acquisition_date == "" || 
+        newGunData.firearm_type == "" ||
+        newGunData.manufacturer == "" ||
+        newGunData.model == "" ||
+        newGunData.caliber_gauge == "" ||
+        newGunData.serial_num == "" ) {
+        
+        $("#newGunError").html("Please fill out all fields");
+        return false;
+    }
+    
     
     $.ajax({
           url: '/gun',
@@ -411,8 +436,18 @@ var newGun = function() {
           },
           success: function(result) {
             console.log(result);
-            $("#error").show();
-            $("#error").html("<h3>Something went wrong making a new gun</h3>");
+              $("#newAcquisitionDate").val('');
+              $("#newFirearmType").val('');
+              $("#newManufacturer").val('');
+              $("#newModel").val('');
+              $("#newCaliber").val('');
+              $("#newSerial").val('');
+              $("#newGunSuccess").html("<h3>New gun creation successful!</h3>");
+              setTimeout(function(){
+                    $("#newGunSuccess").html("");
+              }, 2000);
+//            $("#error").show();
+//            $("#error").html("<h3>Something went wrong making a new gun</h3>");
           }
         });
     

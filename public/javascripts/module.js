@@ -47,35 +47,35 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
       ]
     };
     
-    $scope.guns = [
-          {
-              "acquisition_date": "20 Feb, 2016",
-              "firearm_type": "handgun",
-              "manufacturer": "glock",
-              "model": "17",
-              "caliber_guage": "9mm",
-              "serial_num": "12345678",
-              "status": "active"
-          },
-          {
-              "acquisition_date": "18 Feb, 2016",
-              "firearm_type": "shotgun",
-              "manufacturer": "benelli",
-              "model": "cordoba",
-              "caliber_guage": "12 guage",
-              "serial_num": "87654321",
-              "status": "alert"
-          },
-          {
-              "acquisition_date": "16 Feb, 2016",
-              "firearm_type": "rifle",
-              "manufacturer": "browning",
-              "model": "x-bolt medallion",
-              "caliber_guage": "lol idk",
-              "serial_num": "13247586",
-              "status": "off"
-          }
-      ];
+//    $scope.guns = [
+//          {
+//              "acquisition_date": "20 Feb, 2016",
+//              "firearm_type": "handgun",
+//              "manufacturer": "glock",
+//              "model": "17",
+//              "caliber_guage": "9mm",
+//              "serial_num": "12345678",
+//              "status": "active"
+//          },
+//          {
+//              "acquisition_date": "18 Feb, 2016",
+//              "firearm_type": "shotgun",
+//              "manufacturer": "benelli",
+//              "model": "cordoba",
+//              "caliber_guage": "12 guage",
+//              "serial_num": "87654321",
+//              "status": "alert"
+//          },
+//          {
+//              "acquisition_date": "16 Feb, 2016",
+//              "firearm_type": "rifle",
+//              "manufacturer": "browning",
+//              "model": "x-bolt medallion",
+//              "caliber_guage": "lol idk",
+//              "serial_num": "13247586",
+//              "status": "off"
+//          }
+//      ];
 
     $scope.gunActive = function(gun) {
         gun.status="active";
@@ -139,7 +139,7 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
     
     $scope.pollDB = function (message) {
         
-        var intervalPeriod = 10000;
+        var intervalPeriod = 2000;
         
         var rep = $interval(function () {
             $scope.getData();

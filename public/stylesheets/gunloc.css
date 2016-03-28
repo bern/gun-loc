@@ -804,3 +804,7 @@ hr.off-primary:after {
 .navbar-default .navbar-brand:focus {
     color: white;
 }
+
+.logoutbutton:hover {
+    cursor: pointer;
+}
