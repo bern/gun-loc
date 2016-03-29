@@ -1,0 +1,66 @@
+Compile and make binary
+avr-gcc -std=gnu11 -mmcu=atmega328p -O0 *.c *.h -o main && avr-objcopy -O binary main main.bin
+
+RSTDISABL = 0
+
+6Mhz External Crystal Oscillator
+  - CLK_DIV_8 = 1
+  - Low Power Oscillator Mode
+    - Fuses
+      - CLKSEL = 1101
+      - SUT = 11
+  - Connected to XTAL1 + XTAL2
+    - XTAL1 = 9
+    - XTAL2 = 10
+  - Capacitors to GND
+    - C1 = C2 = 12 - 22 pF
+
+Serial 1200 Baud
+  - TWBR = 624
+  - U2Xn = 1
+
+I2C Bus
+  - 100kHz clock rate
+    - System clock must be at least 1.6MHz
+  - No pull up resistors
+  - Prescaler = 1
+
+0.1uF Decoupling Capacitor
+  - On AVR
+  - On Accelerometer
+
+MPU-6050
+  - Address 0x69 << 1
+  - ADO connected to GND
+  - Motion Triggered on 0.001g Acceleration
+  - Interrupt fires -- PD2 (Pin 4) Active High
+    - Clear Interrupt by Reading Status
+  - Motion Detected -> "OW!" on Serial
+  - Transmit numbers 1 - 255 on Serial
+      to change sensitivity. Will echo back.
+
+When IDLE, system sleeps with SLEEP_MODE_IDLE
+  - Woken by
+    - Motion
+    - Recieve on UART
+
+Voltage Regulator
+  - Facing you
+    - VIN on Left
+    - VOUT on Right
+    - GND
+  - 10uF on VIN & VOUT
+  - 0.1uF on VOUT
+
+ISCP
+  - RESET | Pin1
+  - SCK | Pin19
+  - MOSI | Pin17
+  - MISO | Pin18
+  - Connector
+    - Reset | 1
+    - VCC   | 2
+    - GND   | 3
+    - MOSI  | 4
+    - MISO  | 5
+    - SCK   | 6
