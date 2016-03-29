@@ -851,3 +851,7 @@ hr.off-primary:after {
     color: #f2f2f4;
 }
 
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: #d2d0d1;
+}
+
