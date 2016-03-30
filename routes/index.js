@@ -214,6 +214,16 @@ router.get('/gun', function(req, res, next) {
   }
 });
 
+router.delete('/gun/:id', function(req, res, next) {
+  Gun.remove({_id: req.params.id}, function(err, gun) {
+    if (!err) {
+      res.status(200).send("Gun deleted successfully");
+    } else {
+      res.status(500).send(err);
+    }
+  });
+});
+
 // router.get('/text', function(req, res, next) {
 //   client.messages.create({
 //     to: "+17274224360",

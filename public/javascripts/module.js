@@ -148,6 +148,20 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
       });
     }
 
+    $scope.deleteGun = function(gun) {
+      var id = gun._id;
+      $http({
+        method: 'DELETE',
+        url: '/gun/' + id
+      }).then(function successCallback(response) {
+        console.log(response);
+        $scope.getData();
+      }, function errorCallback(response) {
+        console.log("Oops...");
+        console.log(response);
+      });
+    }
+
     $scope.pollDB = function (message) {
 
         var intervalPeriod = 2000;
