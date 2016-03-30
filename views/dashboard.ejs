@@ -102,9 +102,9 @@
                         </li>
 -->
                         <li class="page-scroll logoutbutton">
-                            
+
                                 <a onclick="logout()">Logout</a>
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -144,7 +144,8 @@
                   <div class="card-block">
                       <div class="gun-item gun-left gun-first col-md-8">
                          <h4 class="card-title">Type: {{gun.firearm_type}}</h4>
-                         <p class="card-text">Date: {{gun.acquisition_date}}</p>
+                         <p class="card-text">Acquisition Date: {{gun.acquisition_date | date:'MM/dd/yyyy'}}</p>
+                         <small>Connection ID: {{gun._id}}</small>
                       </div>
 
                       <div class="gun-item gun-mid col-md-8">
@@ -282,11 +283,11 @@
 -->
                     </div>
                     <div class="error" style="color: red" id="newGunError">
-                        
+
                     </div>
-                    
+
                     <div class="error" style="color: green" id="newGunSuccess">
-                        
+
                     </div>
                 </form>
                 <button class="btn btn-default btn-gunloc" onClick="newGun()">Submit</button>
@@ -404,7 +405,7 @@ function makeMagic() {
 }
 // Generate a Bates distribution of 10 random variables.
 var values = d3.range(1000).map(d3.random.bates(10));
-    
+
 var newGun = function() {
     var newGunData = {};
     newGunData.acquisition_date = $("#newAcquisitionDate").val();
@@ -413,19 +414,19 @@ var newGun = function() {
     newGunData.model = $("#newModel").val();
     newGunData.caliber_gauge = $("#newCaliber").val();
     newGunData.serial_num = $("#newSerial").val();
-    
-    if (newGunData.acquisition_date == "" || 
+
+    if (newGunData.acquisition_date == "" ||
         newGunData.firearm_type == "" ||
         newGunData.manufacturer == "" ||
         newGunData.model == "" ||
         newGunData.caliber_gauge == "" ||
         newGunData.serial_num == "" ) {
-        
+
         $("#newGunError").html("Please fill out all fields");
         return false;
     }
-    
-    
+
+
     $.ajax({
           url: '/gun',
           type: 'post',
@@ -450,7 +451,7 @@ var newGun = function() {
 //            $("#error").html("<h3>Something went wrong making a new gun</h3>");
           }
         });
-    
+
 }
 // console.log(values);
 
