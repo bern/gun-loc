@@ -38,11 +38,15 @@ MPU-6050
   - Motion Detected -> "OW!" on Serial
   - Transmit numbers 1 - 255 on Serial
       to change sensitivity. Will echo back.
+  - Power Consumption
+    - 3.9mA
 
 When IDLE, system sleeps with SLEEP_MODE_IDLE
   - Woken by
     - Motion
     - Recieve on UART
+  - Sleep Power Consumption
+    - 0.9mA
 
 Voltage Regulator
   - Facing you
@@ -64,3 +68,7 @@ ISCP
     - MOSI  | 4
     - MISO  | 5
     - SCK   | 6
+
+Bluetooth HC-06
+  - Power Consumption
+    - 8mA
