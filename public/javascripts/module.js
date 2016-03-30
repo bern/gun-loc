@@ -150,8 +150,8 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
 
     $scope.deleteGun = function(gun) {
       var id = gun._id;
-      $http({
-        method: 'DELETE',
+      /*$http({
+        method: 'DEL',
         url: '/gun/' + id
       }).then(function successCallback(response) {
         console.log(response);
@@ -159,7 +159,8 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
       }, function errorCallback(response) {
         console.log("Oops...");
         console.log(response);
-      });
+      });*/
+      $http.delete('/gun/' + id);
     }
 
     $scope.pollDB = function (message) {
