@@ -691,7 +691,7 @@ footer .footer-below {
 .gun-item {
     display: inline-block;
     text-overflow:clip;
-    width: 20%
+    width: 16%
 }
 
 hr.active-light,
@@ -772,6 +772,51 @@ hr.alert-primary:after {
     background-color: #fff;
 }
 
+hr.delete-gun,
+hr.delete-primary {
+    margin: 25px auto 30px;
+    padding: 0;
+    max-width: 250px;
+    border: 0;
+    border-top: solid 5px;
+    text-align: center;
+}
+
+hr.delete-gun:after,
+hr.delte-primary {
+    content: "\f00d";
+    display: inline-block;
+    position: relative;
+    top: -.8em;
+    padding: 0 .25em;
+    font-family: FontAwesome;
+    font-size: 2em;
+}
+
+hr.delete-gun {
+    border-color: #fff;
+}
+
+hr.delete-gun:hover:after {
+    background-color: #005368;
+    cursor: pointer;
+    cursor: hand;
+}
+
+hr.delete-gun:after {
+    color: #fff;
+    background-color: #008EB2;
+}
+
+hr.delete-primary {
+    border-color: #2c3e50;
+}
+
+hr.delete-primary:after {
+    color: green;
+    background-color: #fff;
+}
+
 hr.off-light,
 hr.off-primary {
     margin: 25px auto 30px;
@@ -811,8 +856,13 @@ hr.off-primary:after {
     background-color: #fff;
 }
 
+.gun-delete button {
+    width: 100px;
+}
+
 .gun-enable button {
     width: 100px;
+    margin-top: 5px;
 }
 
 .iot:hover {

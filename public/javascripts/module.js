@@ -1,9 +1,9 @@
 var module = angular.module('app', []);
 
 module.controller('appController', ['$scope', '$http', '$interval', function($scope, $http, $interval) {
-    
+
     $scope.userData = [];
-    
+
     $scope.data = {
       "username": "johndoe",
       "password": "yolo",
@@ -46,7 +46,7 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
           }
       ]
     };
-    
+
 //    $scope.guns = [
 //          {
 //              "acquisition_date": "20 Feb, 2016",
@@ -78,20 +78,18 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
 //      ];
 
     $scope.gunActive = function(gun) {
-        gun.status="active";
-        //tell database this
+        $scope.toggleOnOff(gun._id);
     }
-    
+
     $scope.gunOff = function(gun) {
-        gun.status="off";
-        //tell database this
+        $scope.toggleOnOff(gun._id);
     }
-    
+
     $scope.gunReset = function(gun) {
         //gun.status = "active";
-        $scope.reset();
+        $scope.reset(gun._id);
     }
-    
+
     $scope.getUserInfo = function() {
         console.log("Fetching user info...");
         $http({
@@ -106,8 +104,8 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
             console.log(response);
         });
     }
-    
-    $scope.getData = function() {
+
+    $scope.getData = function(id) {
         console.log("Fetching data...");
         $http({
           method: 'GET',
@@ -121,38 +119,66 @@ module.controller('appController', ['$scope', '$http', '$interval', function($sc
             console.log(response);
         });
     }
-    
-    $scope.reset  = function() {
+
+    $scope.reset  = function(id) {
         console.log("Resetting alert...");
         $http({
           method: 'GET',
-          url: '/reset'
+          url: '/reset/' + id
         }).then(function successCallback(response) {
             console.log("Gun reset!");
             console.log(response);
-            $scope.getData();   
+            $scope.getData();
           }, function errorCallback(response) {
             console.log("Oops...");
             console.log(response);
         });
     }
-    
+
+    $scope.toggleOnOff = function(id) {
+      $http({
+        method: 'GET',
+        url: '/onOff/' + id
+      }).then(function successCallback(response) {
+        console.log("Gun " + response.status);
+        $scope.getData();
+      }, function errorCallback(response) {
+        console.log("Oops...");
+        console.log(response);
+      });
+    }
+
+    $scope.deleteGun = function(gun) {
+      var id = gun._id;
+      /*$http({
+        method: 'DEL',
+        url: '/gun/' + id
+      }).then(function successCallback(response) {
+        console.log(response);
+        $scope.getData();
+      }, function errorCallback(response) {
+        console.log("Oops...");
+        console.log(response);
+      });*/
+      $http.delete('/gun/' + id);
+    }
+
     $scope.pollDB = function (message) {
-        
+
         var intervalPeriod = 2000;
-        
+
         var rep = $interval(function () {
             $scope.getData();
         }, intervalPeriod);
-        
+
     }
-    
+
     var init = function() {
         $scope.getUserInfo();
         $scope.getData();
         $scope.pollDB();
     };
-    
+
     init();
-    
+
 }]);

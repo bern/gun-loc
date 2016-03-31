@@ -87,7 +87,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#page-top">Welcome, {{data.name}}</a>
+                    <a class="navbar-brand" href="/dashboard">Welcome, {{data.name}}</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -102,9 +102,9 @@
                         </li>
 -->
                         <li class="page-scroll logoutbutton">
-                            
+
                                 <a onclick="logout()">Logout</a>
-                            
+
                         </li>
                     </ul>
                 </div>
@@ -131,9 +131,9 @@
 
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                <li role="presentation" onclick="makeMagic()"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                <li role="presentation"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">Edit</a></li>
-                <li role="presentation"><a href="#manage" aria-controls="manage" role="tab" data-toggle="tab">Manage</a></li>
+                <li role="presentation"><a href="#manage" aria-controls="manage" role="tab" data-toggle="tab">Add Guns</a></li>
+                <li role="presentation"><a href="#edit" aria-controls="edit" role="tab" data-toggle="tab">My Profile</a></li>
+                <li role="presentation" onclick="makeMagic()"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Over Time</a></li>
             </ul>
 
           <!-- Tab panes -->
@@ -142,22 +142,23 @@
 <!--                <guns data="data" buttonClick="enableGun(data)"></guns>  -->
                 <div class="card" ng-repeat="gun in guns">
                   <div class="card-block">
-                      <div class="gun-item gun-left gun-first col-md-8">
+                      <div class="gun-item gun-left gun-first col-md-2">
                          <h4 class="card-title">Type: {{gun.firearm_type}}</h4>
-                         <p class="card-text">Date: {{gun.acquisition_date}}</p>
+                         <p class="card-text">Acquisition Date: {{gun.acquisition_date | date:'MM/dd/yyyy'}}</p>
+                         <small>Connection ID: {{gun._id}}</small>
                       </div>
 
-                      <div class="gun-item gun-mid col-md-8">
+                      <div class="gun-item gun-mid col-md-2">
                          <h4 class="card-title">Make: {{gun.manufacturer}}</h4>
                          <p class="card-text">Model: {{gun.model}}</p>
                       </div>
 
-                      <div class="gun-item gun-right col-md-8">
+                      <div class="gun-item gun-right col-md-2">
                          <h4 class="card-title">Caliber: {{gun.caliber_gauge}}</h4>
                          <p class="card-text">Serial #: {{gun.serial_num}}</p>
                       </div>
 
-                      <div class="gun-item gun-status col-md-4">
+                      <div class="gun-item gun-status col-md-1">
                         <hr class="active-light" ng-show="gun.status == 'active'">
                         <hr class="alert-light" ng-show="gun.status == 'alert'">
                         <hr class="off-light" ng-show="gun.status == 'off'">
@@ -170,6 +171,11 @@
                           <button class="btn btn-gunloc" ng-click='gunOff(gun)' ng-show="gun.status == 'active'">Disable</button>
                           <button class="btn btn-gunloc" ng-click='gunReset(gun)' ng-show="gun.status == 'alert'">Reset</button>
                       </div>
+
+		      <div class="gun-item gun-enable col-md-1">
+		      	<hr class="delete-gun" ng-click='deleteGun(gun)'>
+		      </div>
+
                   </div>
                 </div>
             </div>
@@ -282,11 +288,11 @@
 -->
                     </div>
                     <div class="error" style="color: red" id="newGunError">
-                        
+
                     </div>
-                    
+
                     <div class="error" style="color: green" id="newGunSuccess">
-                        
+
                     </div>
                 </form>
                 <button class="btn btn-default btn-gunloc" onClick="newGun()">Submit</button>
@@ -404,7 +410,7 @@ function makeMagic() {
 }
 // Generate a Bates distribution of 10 random variables.
 var values = d3.range(1000).map(d3.random.bates(10));
-    
+
 var newGun = function() {
     var newGunData = {};
     newGunData.acquisition_date = $("#newAcquisitionDate").val();
@@ -413,19 +419,19 @@ var newGun = function() {
     newGunData.model = $("#newModel").val();
     newGunData.caliber_gauge = $("#newCaliber").val();
     newGunData.serial_num = $("#newSerial").val();
-    
-    if (newGunData.acquisition_date == "" || 
+
+    if (newGunData.acquisition_date == "" ||
         newGunData.firearm_type == "" ||
         newGunData.manufacturer == "" ||
         newGunData.model == "" ||
         newGunData.caliber_gauge == "" ||
         newGunData.serial_num == "" ) {
-        
+
         $("#newGunError").html("Please fill out all fields");
         return false;
     }
-    
-    
+
+
     $.ajax({
           url: '/gun',
           type: 'post',
@@ -450,7 +456,7 @@ var newGun = function() {
 //            $("#error").html("<h3>Something went wrong making a new gun</h3>");
           }
         });
-    
+
 }
 // console.log(values);
 

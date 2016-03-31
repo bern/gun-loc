@@ -127,9 +127,30 @@ router.post('/login', function(req, res, next) {
   });
 });
 
-router.get('/reset', function(req, res, next) {
-  makeActive(function(something) {
+router.get('/reset/:id', function(req, res, next) {
+  makeActive(req.params.id, function(something) {
     res.json(something);
+  });
+});
+
+router.get('/onOff/:id', function(req, res, next) {
+  Gun.findOne({_id: req.params.id}, function(err, gun) {
+    if (err) {
+      res.send(err);
+    } else {
+      if (gun.status.toLowerCase() != 'off') {
+        gun.status = 'off';
+      } else if (gun.status.toLowerCase() == 'off') {
+        gun.status = 'active';
+      }
+      gun.save(function(err, updatedGun) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.json(updatedGun);
+        }
+      });
+    }
   });
 });
 
@@ -193,6 +214,16 @@ router.get('/gun', function(req, res, next) {
   }
 });
 
+router.delete('/gun/:id', function(req, res, next) {
+  Gun.remove({_id: req.params.id}, function(err, gun) {
+    if (!err) {
+      res.status(200).send("Gun deleted successfully");
+    } else {
+      res.status(500).send(err);
+    }
+  });
+});
+
 // router.get('/text', function(req, res, next) {
 //   client.messages.create({
 //     to: "+17274224360",
@@ -254,8 +285,8 @@ function text(user, gun) {
   });
 }
 //active, alert, off
-function makeActive(callback) {
-  Gun.findOne({gun_num: 0}, function(err, gun) {
+function makeActive(id, callback) {
+  Gun.findOne({_id: id}, function(err, gun) {
       var status = gun.status;
       if (status.toLowerCase() != 'active') {
         gun.status = 'active';
