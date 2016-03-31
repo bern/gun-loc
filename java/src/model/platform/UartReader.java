@@ -8,7 +8,7 @@ import gnu.io.NRSerialPort;
 
 public class UartReader extends PlatformReader {
   private DataInputStream stream;
-  private final int baud = 9600;
+  private final int baud = 4800;
 
   @Override
   public void run() {
@@ -20,8 +20,10 @@ public class UartReader extends PlatformReader {
     char[] num = new char[64];
     while (this.isRunning()) {
       if (this.read() == 'O') {
-        if (this.read() == 'w') {
-          this.writeBlob(Blob.Blob0, new Point(0, 0));
+        if (this.read() == 'W') {
+          if (this.read() == '!') {
+            this.writeBlob(Blob.Blob0, new Point(0, 0));
+          }
         }
       }
     }

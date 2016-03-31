@@ -8,9 +8,9 @@
 #define CLK_DIV 1
 
 // UART
-#define BAUD 1200
+#define BAUD 4800
 //#define USART_UBRR(baud) ((F_CPU / (8 * baud)) - 1)
-#define USART_UBRR(baud) (624)
+#define USART_UBRR(baud) (155)
 
 // TWI
 #define F_SCL 100000

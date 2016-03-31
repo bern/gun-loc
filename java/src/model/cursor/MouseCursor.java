@@ -35,7 +35,8 @@ public class MouseCursor extends Cursor {
   protected void handleMouseUpdate(Point mouse) {
     HttpURLConnection connection = null;
     try {
-      URL url = new URL("http://gun-loc.azurewebsites.net/hit");
+      System.out.println("Sending POST");
+      URL url = new URL("http://gun-loc.azurewebsites.net/hit/56fc6d4f9e9249c0268a6a75");
       connection = (HttpURLConnection) url.openConnection();
       connection.setRequestProperty("Content-Length", "0");
       connection.setRequestMethod("POST");
@@ -43,7 +44,7 @@ public class MouseCursor extends Cursor {
       connection.setDoOutput(true);
 
       OutputStream o = connection.getOutputStream();
-      o.write("Ow".getBytes());
+      o.write("OW!".getBytes());
       o.close();
       
       InputStream is = connection.getInputStream();
